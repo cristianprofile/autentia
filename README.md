@@ -1,4 +1,3 @@
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 # Create an application using J2ee standard without using any framework
 
 This project model a simple application managing courses (get all and create a course)
