@@ -23,7 +23,7 @@ public class CourseRepositoryImpl implements CourseRepository {
         Course course2 = new Course("title4",25,Level.INTERMEDIATE,false);
         courseList.add(course);
         courseList.add(course2);
-        logger.debug("end getting all courses");
+        logger.debug("end getting all courses size {}",courseList.size());
         return courseList;
     }
 
