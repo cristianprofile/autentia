@@ -4,7 +4,9 @@ git.properties
 .project
 .settings
 target/
+.idea/
 git.properties
+
 
 build/
 
