@@ -1,0 +1,10 @@
+*.iml
+git.properties
+.classpath
+.project
+.settings
+target/
+git.properties
+
+build/
+
