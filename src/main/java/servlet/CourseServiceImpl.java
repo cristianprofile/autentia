@@ -10,7 +10,7 @@ import java.util.List;
 @Singleton
 public class CourseServiceImpl implements CourseService {
 
-
+    //TODO refactor using packages
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
