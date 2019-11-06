@@ -1,4 +1,4 @@
-package launch;
+package com.mylab.cromero;
 
 import org.apache.catalina.WebResourceRoot;
 import org.apache.catalina.WebResourceSet;

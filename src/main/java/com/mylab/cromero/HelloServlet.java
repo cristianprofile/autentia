@@ -1,5 +1,8 @@
-package servlet;
+package com.mylab.cromero;
 
+import com.mylab.cromero.service.Course;
+import com.mylab.cromero.service.CourseService;
+import com.mylab.cromero.service.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,7 +53,7 @@ public class HelloServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
     {
         logger.debug("init post on inside servlet");
-        Course course = new Course("title55",21,Level.ADVANCE,true);
+        Course course = new Course("title55",21, Level.ADVANCE,true);
         courseService.addCourse(course);
         logger.debug("end post on inside servlet");
 

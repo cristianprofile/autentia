@@ -1,4 +1,4 @@
-package servlet;
+package com.mylab.cromero.service;
 
 import java.util.List;
 
