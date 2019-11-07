@@ -97,6 +97,7 @@ public class Main {
 
     public static void main(String[] args) throws Exception {
 
+
         File root = getRootFolder();
         System.setProperty("org.apache.catalina.startup.EXIT_ON_INIT_FAILURE", "true");
         Tomcat tomcat = new Tomcat();
@@ -137,7 +138,7 @@ public class Main {
         ctx.setResources(resources);
 //        getCustomers();
 
-
+        tomcat.enableNaming();
         tomcat.start();
         tomcat.getServer().await();
     }

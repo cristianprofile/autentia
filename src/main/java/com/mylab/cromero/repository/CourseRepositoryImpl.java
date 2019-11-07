@@ -5,9 +5,16 @@ import com.mylab.cromero.service.Level;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.Resource;
 import javax.inject.Singleton;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Stream;
 
 @Singleton
 public class CourseRepositoryImpl implements CourseRepository {
@@ -15,16 +22,26 @@ public class CourseRepositoryImpl implements CourseRepository {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Resource(name = "jdbc/UsersDB")
+    private DataSource dataSource;
+
     @Override
-    public List<Course> getAll(){
+    public List<Course> getAll() throws RuntimeException {
         logger.debug("init getting all courses");
-        List<Course> courseList = new ArrayList<>();
-        Course course = new Course("title1",22, Level.ADVANCE,true);
-        Course course2 = new Course("title4",25,Level.INTERMEDIATE,false);
-        courseList.add(course);
-        courseList.add(course2);
-        logger.debug("end getting all courses size {}",courseList.size());
-        return courseList;
+        try {
+            Connection connection = dataSource.getConnection();
+            Statement stmt = connection.createStatement();
+            String sql = "select * from course";
+            ResultSet rs = stmt.executeQuery(sql);
+            ArrayList<Course> courseList = createList(rs);
+            logger.debug("end getting all courses size {}",courseList.size());
+            return courseList;
+
+        } catch (SQLException e) {
+            //TODO CHANGE WITH CUSTOM EXCEPTION
+            throw  new RuntimeException("exception in database",e);
+        }
+
     }
 
 
@@ -33,6 +50,36 @@ public class CourseRepositoryImpl implements CourseRepository {
     {
 
         //TODO ADD COURSE IN DATABASE
+    }
+
+
+    private ArrayList<Course> createList(ResultSet rs) throws SQLException
+
+    {
+        ArrayList<Course> courses = new ArrayList<>();
+        while (rs.next()) {
+            Course course = createCourse(rs);
+            courses.add(course);
+        }
+        return courses;
+    }
+
+    private Stream<Course> createStream(ResultSet rs) throws SQLException
+
+    {
+        Stream.Builder<Course> builder = Stream.builder();
+        while (rs.next()) {
+            Course course = createCourse(rs);
+            builder.add(course);
+        }
+        return builder.build();
+    }
+
+    //TODO catch exception custom exception hierarchy
+    private static Course createCourse(ResultSet rs) throws SQLException {
+        return new Course(rs.getString("title"), rs.getInt("hours"), Level.valueOf(rs.getString("level")),
+                rs.getBoolean("active")
+        );
     }
 
 }

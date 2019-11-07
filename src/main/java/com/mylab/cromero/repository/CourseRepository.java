@@ -5,7 +5,8 @@ import com.mylab.cromero.service.Course;
 import java.util.List;
 
 public interface CourseRepository {
-    List<Course> getAll();
+
+    List<Course> getAll() throws RuntimeException;
 
     void addCourse(Course course);
 }
