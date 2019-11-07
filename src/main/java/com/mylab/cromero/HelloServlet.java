@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -47,14 +47,14 @@ public class HelloServlet extends HttpServlet {
         try {
             Connection connection = dataSource.getConnection();
             Statement stmt = connection.createStatement();
-            int result = stmt.executeUpdate("CREATE TABLE course (id INT NOT NULL, title VARCHAR(100) NOT NULL, " +
+            int result = stmt.executeUpdate("CREATE TABLE Course (id INTEGER IDENTITY PRIMARY KEY, title VARCHAR(100) NOT NULL, " +
                     "hours" +
-                    " SMALLINT NOT NULL, level VARCHAR(20),active BOOLEAN, PRIMARY KEY (id)); ");
+                    " SMALLINT NOT NULL, level VARCHAR(20),active BOOLEAN); ");
 
-            String insert="INSERT INTO course VALUES (1,'Learn PHP', 20, 'INTERMEDIATE',TRUE);";
+            String insert="INSERT INTO course (title, hours,level,active) VALUES ('Learn PHP', 20, 'INTERMEDIATE',TRUE);";
             result = stmt.executeUpdate(insert);
 
-            insert="INSERT INTO course VALUES (2,'Learn JAVA', 10, 'INTERMEDIATE',FALSE);";
+            insert="INSERT INTO course (title, hours,level,active)  VALUES ('Learn JAVA', 10, 'INTERMEDIATE',FALSE);";
             result = stmt.executeUpdate(insert);
 
         } catch (SQLException e) {
@@ -68,33 +68,31 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
 
         logger.debug("init get all operation inside servlet");
-        ServletOutputStream out = resp.getOutputStream();
-        out.write("hello student servlet".getBytes());
-        List<Course> all = courseService.getAll();
-        all.forEach(course1 -> {
-            try {
-                out.write(course1.toString().getBytes());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-
-        out.flush();
-        out.close();
+        List<Course> courses = courseService.getAll();
+        String shared = "shared";
+        req.setAttribute("sharedId", shared);
+        req.setAttribute("courses",courses);
+        RequestDispatcher rd =
+                req.getRequestDispatcher("courses.jsp");
         logger.debug("end get all operation inside servlet");
+        rd.forward(req, resp);
     }
 
 
 
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-    {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // TODO VALIDATE WITH JSR 303
         logger.debug("init post on inside servlet");
-        Course course = new Course("title55",21, Level.ADVANCE,true);
+        String title = req.getParameter("title");
+        String hours = req.getParameter("hours");
+        String level = req.getParameter("level");
+        String active = req.getParameter("active");
+        Course course = new Course(title,Integer.parseInt(hours), Level.valueOf(level),Boolean.valueOf(active));
         courseService.addCourse(course);
         logger.debug("end post on inside servlet");
-
+        resp.sendRedirect(req.getContextPath() + "/course");
     }
 
     

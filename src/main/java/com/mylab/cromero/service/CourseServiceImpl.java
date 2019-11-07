@@ -29,7 +29,9 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void addCourse(Course course)
     {
-
+        logger.debug("init creating all courses");
+        courseRepository.addCourse(course);
+        logger.debug("end creating all courses");
      //TODO ADD COURSE IN DATABASE
     }
 

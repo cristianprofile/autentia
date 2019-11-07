@@ -31,7 +31,7 @@ public class CourseRepositoryImpl implements CourseRepository {
         try {
             Connection connection = dataSource.getConnection();
             Statement stmt = connection.createStatement();
-            String sql = "select * from course where active";
+            String sql = "select * from Course where active order by title asc";
             ResultSet rs = stmt.executeQuery(sql);
             ArrayList<Course> courseList = createList(rs);
             logger.debug("end getting all courses size {}",courseList.size());
@@ -48,6 +48,21 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Override
     public void addCourse(Course course)
     {
+        //TODO INSERT SENTENCE
+        try {
+            logger.debug("init creating a courses");
+            Connection connection = dataSource.getConnection();
+            Statement stmt = connection.createStatement();
+            String sql = "INSERT INTO Course (title, hours,level,active) " + "VALUES ('" +course.getTitle()+
+                    "',"+course.getHours()+",'"+course.getLevel().name()+"', "+course.getActive()+")";
+            stmt.execute(sql);
+
+            logger.debug("end creating a course");
+
+        } catch (SQLException e) {
+            //TODO CHANGE WITH CUSTOM EXCEPTION
+            throw  new RuntimeException("exception in database",e);
+        }
 
         //TODO ADD COURSE IN DATABASE
     }
