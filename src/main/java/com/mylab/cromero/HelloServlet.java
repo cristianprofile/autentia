@@ -69,8 +69,6 @@ public class HelloServlet extends HttpServlet {
 
         logger.debug("init get all operation inside servlet");
         List<Course> courses = courseService.getAll();
-        String shared = "shared";
-        req.setAttribute("sharedId", shared);
         req.setAttribute("courses",courses);
         RequestDispatcher rd =
                 req.getRequestDispatcher("courses.jsp");
@@ -90,6 +88,7 @@ public class HelloServlet extends HttpServlet {
         String level = req.getParameter("level");
         String active = req.getParameter("active");
         Course course = new Course(title,Integer.parseInt(hours), Level.valueOf(level),Boolean.valueOf(active));
+        logger.debug("course data received {}",course);
         courseService.addCourse(course);
         logger.debug("end post on inside servlet");
         resp.sendRedirect(req.getContextPath() + "/course");

@@ -24,7 +24,5 @@ autentia.bat (windows)
 Access to you application with your favorite browser
 
 ```
-localhost:8080/course (get all)
-
-localhost:8080/course (post)
+localhost:8080/course
 ```
