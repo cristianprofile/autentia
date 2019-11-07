@@ -31,7 +31,7 @@ public class CourseRepositoryImpl implements CourseRepository {
         try {
             Connection connection = dataSource.getConnection();
             Statement stmt = connection.createStatement();
-            String sql = "select * from course";
+            String sql = "select * from course where active";
             ResultSet rs = stmt.executeQuery(sql);
             ArrayList<Course> courseList = createList(rs);
             logger.debug("end getting all courses size {}",courseList.size());
