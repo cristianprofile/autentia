@@ -2,6 +2,7 @@ package com.mylab.cromero.repository;
 
 import com.mylab.cromero.service.Course;
 import com.mylab.cromero.service.Level;
+import com.mylab.cromero.service.Teacher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,9 +32,16 @@ public class CourseRepositoryImpl implements CourseRepository {
         try {
             Connection connection = dataSource.getConnection();
             Statement stmt = connection.createStatement();
-            String sql = "select * from Course where active order by title asc";
+            String sql = "select C.title,C.level,C.hours,C.active,T.id as teacherId,T.name teacherName,T.email as " +
+                    "teacherEmail " +
+                    "from " +
+                    "Course as C " +
+                    "inner JOIN Teacher as T ON C.teacherId = T.id " +
+                    "where C.active" +
+                    " order by C.title " +
+                    "asc";
             ResultSet rs = stmt.executeQuery(sql);
-            ArrayList<Course> courseList = createList(rs);
+            List<Course> courseList = createList(rs);
             logger.debug("end getting all courses size {}",courseList.size());
             return courseList;
 
@@ -53,10 +61,9 @@ public class CourseRepositoryImpl implements CourseRepository {
             logger.debug("init creating a courses");
             Connection connection = dataSource.getConnection();
             Statement stmt = connection.createStatement();
-            String sql = "INSERT INTO Course (title, hours,level,active) " + "VALUES ('" +course.getTitle()+
-                    "',"+course.getHours()+",'"+course.getLevel().name()+"', "+course.getActive()+")";
+            String sql = "INSERT INTO Course (title, hours,level,active,teacherId) " + "VALUES ('" +course.getTitle()+
+                    "',"+course.getHours()+",'"+course.getLevel().name()+"', "+course.getActive()+","+course.getTeacher().getId()+")";
             stmt.execute(sql);
-
             logger.debug("end creating a course");
 
         } catch (SQLException e) {
@@ -89,11 +96,12 @@ public class CourseRepositoryImpl implements CourseRepository {
         }
         return builder.build();
     }
-
     //TODO catch exception custom exception hierarchy
+
     private static Course createCourse(ResultSet rs) throws SQLException {
         return new Course(rs.getString("title"), rs.getInt("hours"), Level.valueOf(rs.getString("level")),
-                rs.getBoolean("active")
+                rs.getBoolean("active"),
+                new Teacher(rs.getInt("teacherId"),rs.getString("teacherName"),rs.getString("teacherEmail"))
         );
     }
 

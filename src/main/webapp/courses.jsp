@@ -1,5 +1,6 @@
 <%@ page import="com.mylab.cromero.service.Course" %>
 <%@ page import="com.mylab.cromero.service.Level" %>
+<%@ page import="com.mylab.cromero.service.Teacher" %>
 <%@ page import="java.util.List" %>
 
 <script>
@@ -110,6 +111,29 @@
             <input type="text" name="hours">
         </div>
 
+
+        <%
+            List<Teacher> teachers = (List<Teacher>) request.getAttribute("teachers");
+            if (teachers != null) {
+        %>
+        <div>
+            <label>teacher</label>
+            <select name="teacherId">
+                <% for (int j = 0; j < teachers.size(); ++j) {
+                %>
+                <option value="<%= teachers.get(j).getId() %>"><%= teachers.get(j).getName() %>
+                </option>
+
+                <%
+                    }
+                %>
+
+            </select>
+        </div>
+        <%
+            }
+        %>
+
         <div>
             <label>level</label>
             <select name="level">
@@ -144,6 +168,7 @@
     <table>
         <tr>
             <th>title</th>
+            <th>teacher</th>
             <th>level</th>
             <th>hours</th>
         </tr>
@@ -154,6 +179,8 @@
 
         <tr>
             <td><%= courses.get(i).getTitle() %>
+            </td>
+            <td><%= courses.get(i).getTeacher().getName() %>
             </td>
             <td><%= courses.get(i).getLevel() %>
             </td>
