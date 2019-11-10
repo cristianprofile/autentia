@@ -15,6 +15,7 @@ This is a maven multi-module project with 2 artifacts:
 
 . autentia-services: it contains service logic of application
 . autentia-web: it contains simple servlet web application using servlet an j2ee with tomcat embedded
+. autentia-api-rest: it contains simple rest api web using servlet an j2ee with tomcat embedded
 
 image::/images/project-modules.png?raw=true[project modules]
 
