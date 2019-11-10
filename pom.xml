@@ -13,6 +13,7 @@
   <modules>
         <module>autentia-service</module>
          <module>autentia-web</module>
+         <module>autentia-api-rest</module>
     </modules>
   
   <properties>

@@ -1,5 +1,7 @@
 # Create an application using J2ee standard without using any framework
 
+image:https://travis-ci.com/cristianprofile/autentia.svg?branch=master["Build Status", link="https://travis-ci.com/cristianprofile/autentia"]
+
 This project model a simple application managing courses (get all and create a course)
 A course entity has 
 
@@ -18,7 +20,7 @@ image::/images/project-modules.png?raw=true[project modules]
 
 ## How to run application
 
-Using maven you can create package with command:
+Using maven you can create package with command (main parent folder):
 
 [source,java]
 ----
@@ -26,6 +28,8 @@ $ mvn package
 ----
 
 If command ends successfully inside target/bin you will have a script to run your application
+
+### How to run web application
 
 AUTENTIA WEB MAVEN MODULE
 
@@ -42,3 +46,22 @@ Access to you application with your favorite browser
 ----
 localhost:8080/course
 ----
+
+### How to run rest api
+
+AUTENTIA REST API
+
+[source,java]
+----
+$ ./autentia/autentia-api-rest/target/bin/autentia (unix/linux)
+/autentia-api-rest/target/bin/autentia.bat (windows)
+----
+
+
+
+Use postman test cases defined in postman folder
+
+image::/images/postman.png?raw=true[project modules]
+
+
+### How to run rest api

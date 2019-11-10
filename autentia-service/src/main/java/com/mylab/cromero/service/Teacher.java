@@ -18,6 +18,9 @@ public class Teacher {
         this.email=null;
     }
 
+    public Teacher() {
+    }
+
     public Integer getId() {
         return id;
     }

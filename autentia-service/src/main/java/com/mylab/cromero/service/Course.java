@@ -18,6 +18,9 @@ public class Course implements Serializable {
         this.teacher = teacher;
     }
 
+    public Course() {
+    }
+
     public String getTitle() {
         return title;
     }
