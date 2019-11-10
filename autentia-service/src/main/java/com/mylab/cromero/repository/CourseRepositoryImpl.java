@@ -30,9 +30,8 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Override
     public List<Course> getAll() throws RuntimeException {
         logger.debug("init getting all courses");
-        try {
-            Connection connection = dataSource.getConnection();
-            Statement stmt = connection.createStatement();
+        try (Connection connection = dataSource.getConnection();
+             Statement stmt = connection.createStatement()){
             String sql = "select C.title,C.level,C.hours,C.active,T.id as teacherId,T.name teacherName,T.email as " +
                     "teacherEmail " +
                     "from " +
@@ -57,20 +56,26 @@ public class CourseRepositoryImpl implements CourseRepository {
     @Override
     public void addCourse(Course course)
     {
+
         //TODO INSERT SENTENCE
-        try {
+        try (Connection connection = dataSource.getConnection();
+             Statement stmt = connection.createStatement()){
             logger.debug("init creating a courses");
-            Connection connection = dataSource.getConnection();
-            Statement stmt = connection.createStatement();
+
             String sql = "INSERT INTO Course (title, hours,level,active,teacherId) " + "VALUES ('" +course.getTitle()+
                     "',"+course.getHours()+",'"+course.getLevel().name()+"', "+course.getActive()+","+course.getTeacher().getId()+")";
             stmt.execute(sql);
             logger.debug("end creating a course");
+            // end transaction block, commit changes
+            connection.commit();
+            // good practice to set it back to default true
+            connection.setAutoCommit(true);
 
         } catch (SQLException e) {
             //TODO CHANGE WITH CUSTOM EXCEPTION
             throw  new RuntimeException("exception in database",e);
         }
+
 
         //TODO ADD COURSE IN DATABASE
     }

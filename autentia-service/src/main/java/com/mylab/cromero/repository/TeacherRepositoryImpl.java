@@ -26,9 +26,8 @@ public class TeacherRepositoryImpl  implements TeacherRepository{
     public List<Teacher> getAll(){
 
         logger.debug("init getting all teachers");
-        try {
-            Connection connection = dataSource.getConnection();
-            Statement stmt = connection.createStatement();
+        try (Connection connection = dataSource.getConnection();
+             Statement stmt = connection.createStatement()){
             String sql = "select * from Teacher";
             ResultSet rs = stmt.executeQuery(sql);
             List<Teacher> courseList = createList(rs);
