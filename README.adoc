@@ -1,0 +1,44 @@
+# Create an application using J2ee standard without using any framework
+
+This project model a simple application managing courses (get all and create a course)
+A course entity has 
+
+## Prerequisites
+
+* Java 8+ and maven 3 installed.
+
+## Maven Structure
+
+This is a maven multi-module project with 2 artifacts:
+
+. autentia-services: it contains service logic of application
+. autentia-web: it contains simple servlet web application using servlet an j2ee with tomcat embedded
+
+image::/images/project-modules.png?raw=true[project modules]
+
+## How to run application
+
+Using maven you can create package with command:
+
+[source,java]
+----
+$ mvn package
+----
+
+If command ends successfully inside target/bin you will have a script to run your application
+
+AUTENTIA WEB MAVEN MODULE
+
+[source,java]
+----
+$ ./autentia/autentia-web/target/bin autentia (unix/linux)
+/autentia/autentia-web/target/bin/autentia.bat (windows)
+----
+
+Access to you application with your favorite browser
+
+
+[source,java]
+----
+localhost:8080/course
+----

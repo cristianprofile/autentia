@@ -20,6 +20,7 @@ import java.util.stream.Stream;
 @Singleton
 public class CourseRepositoryImpl implements CourseRepository {
 
+    //  !!!!! TODO EXCEPTION MAPPING WITH CUSTOM HIERARCHY
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 

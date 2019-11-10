@@ -28,7 +28,7 @@ import java.util.List;
         name = "MyServlet", 
         urlPatterns = {"/course"}
     )
-public class HelloServlet extends HttpServlet {
+public class AutentiaServlet extends HttpServlet {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -89,6 +89,11 @@ public class HelloServlet extends HttpServlet {
             throws ServletException, IOException {
 
         logger.debug("init get all operation inside servlet");
+
+        //TODO PREPARE PAGINATION
+        // int currentPage = Integer.valueOf(req.getParameter("currentPage"));
+        // int recordsPerPage = Integer.valueOf(req.getParameter("recordsPerPage"));
+
         List<Course> courseList = courseService.getAll();
         req.setAttribute("courses",courseList);
 
@@ -98,7 +103,6 @@ public class HelloServlet extends HttpServlet {
         RequestDispatcher rd =
                 req.getRequestDispatcher("courses.jsp");
         logger.debug("end get all operation inside servlet");
-
 
         rd.forward(req, resp);
     }
@@ -122,6 +126,7 @@ public class HelloServlet extends HttpServlet {
         logger.debug("end post on inside servlet");
         resp.sendRedirect(req.getContextPath() + "/course");
     }
+
 
     
 }

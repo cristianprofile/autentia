@@ -7,7 +7,6 @@ import org.apache.catalina.startup.Tomcat;
 import org.apache.catalina.webresources.DirResourceSet;
 import org.apache.catalina.webresources.EmptyResourceSet;
 import org.apache.catalina.webresources.StandardRoot;
-import org.hsqldb.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,63 +14,10 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 public class Main {
 
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
-
-
-    public static void getCustomers() {
-
-        Server server = new Server();
-        server.setDatabaseName(0, "mainDb");
-        server.setDatabasePath(0, "mem:mainDb");
-        server.setDatabaseName(1, "standbyDb");
-        server.setDatabasePath(1, "mem:standbyDb");
-        server.setPort(9001); // this is the default port
-        server.start();
-
-        Connection conn = null;
-        String db = "jdbc:hsqldb:hsql://localhost:9001/mainDb";
-        String user = "SA";
-        String password = "";
-
-        try {
-            // Create database connection
-            conn = DriverManager.getConnection(db, user, password);
-
-            // Create and execute statement
-            Statement stmt = conn.createStatement();
-            ResultSet rs =  stmt.executeQuery("select FIRSTNAME, LASTNAME from CUSTOMER");
-
-            // Loop through the data and print all artist names
-            while(rs.next()) {
-                System.out.println("Customer Name: " + rs.getString("FIRSTNAME") + " " + rs.getString("LASTNAME"));
-            }
-
-            // Clean up
-            rs.close();
-            stmt.close();
-        }
-        catch (Exception e) {
-            System.err.println(e.getMessage());
-        }
-        finally {
-            try {
-                // Close connection
-                if (conn != null)
-                    conn.close();
-            }
-            catch (Exception e) {
-                System.err.println(e.getMessage());
-            }
-        }
-    }
-
 
 
 
