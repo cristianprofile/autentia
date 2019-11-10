@@ -25,13 +25,14 @@ Using maven you can create package with command:
 $ mvn package
 ----
 
-If command ends successfully inside target/bin you have a script to run your application
+If command ends successfully inside target/bin you will have a script to run your application
 
+AUTENTIA WEB MAVEN MODULE
 
 [source,java]
 ----
-$ ./autentia (unix/linux)
-autentia.bat (windows)
+$ ./autentia/autentia-web/target/bin autentia (unix/linux)
+/autentia/autentia-web/target/bin/autentia.bat (windows)
 ----
 
 Access to you application with your favorite browser
