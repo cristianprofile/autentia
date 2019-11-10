@@ -1,4 +1,8 @@
 language: java
-sudo: false # faster builds
 
-script: "mvn package"
+jdk:
+  - oraclejdk8
+
+script:
+
+  - mvn clean install
