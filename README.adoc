@@ -7,22 +7,37 @@ A course entity has
 
 * Java 8+ and maven 3 installed.
 
+## Maven Structure
+
+This is a maven multi-module project with 2 artifacts:
+
+. autentia-services: it contains service logic of application
+. autentia-web: it contains simple servlet web application using servlet an j2ee with tomcat embedded
+
+image::/images/project-modules.png?raw=true[project modules]
+
 ## How to run application
 
 Using maven you can create package with command:
-```
++
+[source,java]
+----
 $ mvn package
-```
+----
 
 If command ends successfully inside target/bin you have a script to run your application
 
-```
++
+[source,java]
+----
 $ ./autentia (unix/linux)
 autentia.bat (windows)
-```
+----
 
 Access to you application with your favorite browser
 
-```
++
+[source,java]
+----
 localhost:8080/course
-```
+----
