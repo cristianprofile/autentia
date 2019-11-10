@@ -1,5 +1,7 @@
 # Create an application using J2ee standard without using any framework
 
+image:https://travis-ci.com/cristianprofile/autentia.svg?branch=master["Build Status", link="https://travis-ci.com/cristianprofile/autentia"]
+
 This project model a simple application managing courses (get all and create a course)
 A course entity has 
 
