@@ -7,9 +7,14 @@
   <groupId>com.mylab.cromero</groupId>
   <artifactId>autentia</artifactId>
   <version>1.0-SNAPSHOT</version>
-
   <name>autentia</name>
-
+ <packaging>pom</packaging>
+  
+  <modules>
+        <module>autentia-service</module>
+         <module>autentia-web</module>
+    </modules>
+  
   <properties>
     <tomcat.version>8.5.47</tomcat.version>
     <slf4j.version>1.7.25</slf4j.version>
@@ -18,8 +23,10 @@
     <maven.compiler.source>1.8</maven.compiler.source>
     <maven.compiler.target>1.8</maven.compiler.target>
   </properties>
+  
+  <dependencyManagement>
+  
   <dependencies>
-
     <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-api</artifactId>
@@ -54,36 +61,11 @@
     </dependency>
 
 
-<!--    <dependency>-->
-<!--      <groupId>org.apache.logging.log4j</groupId>-->
-<!--      <artifactId>log4j-api</artifactId>-->
-<!--      <version>2.7</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.apache.logging.log4j</groupId>-->
-<!--      <artifactId>log4j-core</artifactId>-->
-<!--      <version>2.7</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.apache.logging.log4j</groupId>-->
-<!--      <artifactId>log4j-slf4j-impl</artifactId>-->
-<!--      <version>2.7</version>-->
-<!--    </dependency>-->
-
-
-        <dependency>
+    <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
       <version>${logback.version}</version>
       <scope>runtime</scope>
-
-<!--      <exclusions>-->
-<!--        <exclusion>-->
-<!--          <artifactId>slf4j-api</artifactId>-->
-<!--          <groupId>org.slf4j</groupId>-->
-<!--        </exclusion>-->
-<!--      </exclusions>-->
-
     </dependency>
 
     <dependency>
@@ -119,31 +101,7 @@
     </dependency>
 
   </dependencies>
-  <build>
-    <finalName>embeddedTomcatSample</finalName>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>appassembler-maven-plugin</artifactId>
-        <version>2.0.0</version>
-        <configuration>
-          <assembleDirectory>target</assembleDirectory>
-          <programs>
-            <program>
-              <mainClass>com.mylab.cromero.Main</mainClass>
-              <name>autentia</name>
-            </program>
-          </programs>
-        </configuration>
-        <executions>
-          <execution>
-            <phase>package</phase>
-            <goals>
-              <goal>assemble</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-    </plugins>
-  </build>
+  
+  </dependencyManagement>
+
 </project>
