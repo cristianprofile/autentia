@@ -1,8 +1,8 @@
 package com.mylab.cromero.repository;
 
-import com.mylab.cromero.service.Course;
-import com.mylab.cromero.service.Level;
-import com.mylab.cromero.service.Teacher;
+import com.mylab.cromero.service.domain.Course;
+import com.mylab.cromero.service.domain.Level;
+import com.mylab.cromero.service.domain.Teacher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,7 +28,7 @@ public class CourseRepositoryImpl implements CourseRepository {
     private DataSource dataSource;
 
     @Override
-    public List<Course> getAll() throws RuntimeException {
+    public List<Course> getAll() throws SQLException {
         logger.debug("init getting all courses");
         try (Connection connection = dataSource.getConnection();
              Statement stmt = connection.createStatement()){
@@ -45,17 +45,13 @@ public class CourseRepositoryImpl implements CourseRepository {
             logger.debug("end getting all courses size {}",courseList.size());
             return courseList;
 
-        } catch (SQLException e) {
-            //TODO CHANGE WITH CUSTOM EXCEPTION
-            throw  new RuntimeException("exception in database",e);
         }
 
     }
 
 
     @Override
-    public void addCourse(Course course)
-    {
+    public void addCourse(Course course) throws SQLException {
 
         //TODO INSERT SENTENCE
         try (Connection connection = dataSource.getConnection();
@@ -71,11 +67,7 @@ public class CourseRepositoryImpl implements CourseRepository {
             // good practice to set it back to default true
             connection.setAutoCommit(true);
 
-        } catch (SQLException e) {
-            //TODO CHANGE WITH CUSTOM EXCEPTION
-            throw  new RuntimeException("exception in database",e);
         }
-
 
         //TODO ADD COURSE IN DATABASE
     }

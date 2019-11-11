@@ -1,6 +1,6 @@
-<%@ page import="com.mylab.cromero.service.Course" %>
-<%@ page import="com.mylab.cromero.service.Level" %>
-<%@ page import="com.mylab.cromero.service.Teacher" %>
+<%@ page import="com.mylab.cromero.service.domain.Course" %>
+<%@ page import="com.mylab.cromero.service.domain.Level" %>
+<%@ page import="com.mylab.cromero.service.domain.Teacher" %>
 <%@ page import="java.util.List" %>
 
 <script>

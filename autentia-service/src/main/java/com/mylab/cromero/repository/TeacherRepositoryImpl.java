@@ -1,6 +1,6 @@
 package com.mylab.cromero.repository;
 
-import com.mylab.cromero.service.Teacher;
+import com.mylab.cromero.service.domain.Teacher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class TeacherRepositoryImpl  implements TeacherRepository{
     private DataSource dataSource;
 
     @Override
-    public List<Teacher> getAll(){
+    public List<Teacher> getAll() throws SQLException {
 
         logger.debug("init getting all teachers");
         try (Connection connection = dataSource.getConnection();
@@ -34,9 +34,6 @@ public class TeacherRepositoryImpl  implements TeacherRepository{
             logger.debug("end getting all teachers size {}",courseList.size());
             return courseList;
 
-        } catch (SQLException e) {
-            //TODO CHANGE WITH CUSTOM EXCEPTION
-            throw  new RuntimeException("exception in database",e);
         }
 
     }

@@ -1,9 +1,9 @@
 package com.mylab.cromero;
 
-import com.mylab.cromero.service.Course;
+import com.mylab.cromero.service.domain.Course;
 import com.mylab.cromero.service.CourseService;
-import com.mylab.cromero.service.Level;
-import com.mylab.cromero.service.Teacher;
+import com.mylab.cromero.service.domain.Level;
+import com.mylab.cromero.service.domain.Teacher;
 import com.mylab.cromero.service.TeacherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -113,6 +113,7 @@ public class AutentiaServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // TODO VALIDATE WITH JSR 303
+        // TODO EXTRACT LITERALS TO CONSTANT OR ENUM CLASS
         logger.debug("init post on inside servlet");
         String title = req.getParameter("title");
         String hours = req.getParameter("hours");

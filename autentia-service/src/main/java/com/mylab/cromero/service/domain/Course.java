@@ -1,4 +1,4 @@
-package com.mylab.cromero.service;
+package com.mylab.cromero.service.domain;
 
 import java.io.Serializable;
 
