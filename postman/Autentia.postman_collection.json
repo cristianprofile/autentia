@@ -10,7 +10,7 @@
 			"name": "1.Course test case",
 			"item": [
 				{
-					"name": "Generate_payment_order",
+					"name": "Generate_payment_order_ok",
 					"event": [
 						{
 							"listen": "test",
@@ -47,7 +47,66 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"title\": \"Learn PHP 2\",\n    \"hours\": 200,\n    \"level\": \"INTERMEDIATE\",\n    \"active\": true,\n    \"teacher\": {\n        \"id\": 2\n    }\n}",
+							"raw": "{\n    \"title\": \"Learn hugo 2\",\n    \"hours\": \"22\",\n    \"level\": \"INTERMEDIATE\",\n    \"active\": true,\n    \"teacher\": {\n        \"id\": 2\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/course",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"course"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Generate_payment_order_ko_bad_parameter",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"id": "34861237-072c-4e3b-9c71-1a85a07857cd",
+								"exec": [
+									"pm.test(\"Response time is less than 2500ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(2500);",
+									"});",
+									"",
+									"pm.test(\"Status code is 400\", function () {",
+									"    pm.response.to.have.status(400);",
+									"});",
+									"",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{credentials}}"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Learn PHP 2\",\n    \"hours\": \"asdad\",\n    \"level\": \"INTERMEDIATE\",\n    \"active\": true,\n    \"teacher\": {\n        \"id\": 2\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -87,7 +146,7 @@
 									"",
 									"pm.test(\"Courses muste be greater than zero\", function () {",
 									"    var jsonData = pm.response.json();",
-									"    pm.expect(jsonData.length).to.be.above(0);",
+									"    pm.expect(jsonData.length).to.be.above(1);",
 									"   ",
 									"});"
 								],
