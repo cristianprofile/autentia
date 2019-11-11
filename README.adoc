@@ -7,7 +7,7 @@ A course entity has
 
 ## Prerequisites
 
-* Java 8+ and maven 3 installed.
+* Java 8+, Docker and maven 3 installed.
 
 ## Maven Structure
 
@@ -30,9 +30,18 @@ $ mvn package
 
 If command ends successfully inside target/bin you will have a script to run your application
 
+### Run docker compose database service
+
+Run docker-compose up command in main folder (docker-compose.ylm file):
+
+- mysql database service will be started in port 3306
+- user: root password root (defined .env file)
+
+
+
 ### How to run web application
 
-AUTENTIA WEB MAVEN MODULE
+AUTENTIA WEB MAVEN MODULE (port 8081)
 
 [source,java]
 ----
@@ -45,12 +54,12 @@ Access to you application with your favorite browser
 
 [source,java]
 ----
-localhost:8080/course
+localhost:8081/course
 ----
 
 ### How to run rest api
 
-AUTENTIA REST API
+AUTENTIA REST API (port 8080)
 
 [source,java]
 ----

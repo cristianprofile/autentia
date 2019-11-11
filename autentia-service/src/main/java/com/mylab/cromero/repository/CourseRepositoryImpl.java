@@ -60,11 +60,6 @@ public class CourseRepositoryImpl implements CourseRepository {
                     "',"+course.getHours()+",'"+course.getLevel().name()+"', "+course.getActive()+","+course.getTeacher().getId()+")";
             stmt.execute(sql);
             logger.debug("end creating a course");
-            // end transaction block, commit changes
-            connection.commit();
-            // good practice to set it back to default true
-            connection.setAutoCommit(true);
-
         }
     }
 

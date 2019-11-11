@@ -37,9 +37,10 @@ public class TeacherRepositoryImpl  implements TeacherRepository{
         }
 
     }
-    @Override
+
+
     //TODO REFACTOR DUPLICATE REPOSITORY METHOD
-    public List<Teacher> createList(ResultSet rs) throws SQLException {
+    private List<Teacher> createList(ResultSet rs) throws SQLException {
         ArrayList<Teacher> courses = new ArrayList<Teacher>();
         while (rs.next()) {
             Teacher teacher = createTeacher(rs);
