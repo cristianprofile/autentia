@@ -15,12 +15,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 @Singleton
 public class CourseRepositoryImpl implements CourseRepository {
 
-    //  !!!!! TODO EXCEPTION MAPPING WITH CUSTOM HIERARCHY
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
@@ -68,8 +66,6 @@ public class CourseRepositoryImpl implements CourseRepository {
             connection.setAutoCommit(true);
 
         }
-
-        //TODO ADD COURSE IN DATABASE
     }
 
 
@@ -84,17 +80,6 @@ public class CourseRepositoryImpl implements CourseRepository {
         return courses;
     }
 
-    private Stream<Course> createStream(ResultSet rs) throws SQLException
-
-    {
-        Stream.Builder<Course> builder = Stream.builder();
-        while (rs.next()) {
-            Course course = createCourse(rs);
-            builder.add(course);
-        }
-        return builder.build();
-    }
-    //TODO catch exception custom exception hierarchy
 
     private static Course createCourse(ResultSet rs) throws SQLException {
         return new Course(rs.getString("title"), rs.getInt("hours"), Level.valueOf(rs.getString("level")),
