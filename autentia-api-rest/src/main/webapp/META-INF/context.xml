@@ -8,7 +8,7 @@
               maxWaitMillis="-1"
               name="jdbc/UsersDB"
               type="javax.sql.DataSource"
-              url="jdbc:mysql://localhost:3306/autentiadb"
+              url="jdbc:mysql://mysql:3306/autentiadb"
               username="root"
               password="root" />
 </Context>

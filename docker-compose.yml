@@ -1,10 +1,31 @@
-version: "3.2"
+version: "3.5"
 services:
-  db:
+  api:
+    build: ./autentia-api-rest
+    image: api:api
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+
+  web:
+    build: ./autentia-web
+    image: web:web
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+    depends_on:
+      - mysql
+
+
+  mysql:
     image: mysql:5.5.57
     volumes:
       - ./etc/db/schema:/docker-entrypoint-initdb.d
-    ports:
-      - "3306:3306"
+#    ports:
+#      - "3306:3306"
     env_file:
       - .env
