@@ -70,11 +70,10 @@
             <scope>test</scope>
         </dependency>
 
-
         <dependency>
-            <groupId>org.jboss.weld</groupId>
-            <artifactId>weld-junit4</artifactId>
-            <version>1.3.1.Final</version>
+            <groupId>com.openpojo</groupId>
+            <artifactId>openpojo</artifactId>
+            <version>0.8.13</version>
             <scope>test</scope>
         </dependency>
 
