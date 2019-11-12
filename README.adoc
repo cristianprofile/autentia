@@ -11,7 +11,7 @@ A course entity has
 
 ## Maven Structure
 
-This is a maven multi-module project with 2 artifacts:
+This is a maven multi-module project with 3 modules:
 
 . autentia-services: it contains service logic of application
 . autentia-web: it contains simple servlet web application using servlet an j2ee with tomcat embedded
