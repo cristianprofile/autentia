@@ -30,12 +30,14 @@ $ mvn package
 
 If command ends successfully inside target/bin you will have a script to run your application
 
-### Run docker compose database service
+### Run docker compose up
 
-Run docker-compose up command in main folder (docker-compose.ylm file):
+Run docker-compose up command in main folder (docker-compose.ylm file).
+3 services will be created :
 
-- mysql database service will be started in port 3306
-- user: root password root (defined .env file)
+- mysql database in port (port 3306)
+- rest api (port 8080)
+- web application (port 8081)
 
 
 
@@ -43,14 +45,7 @@ Run docker-compose up command in main folder (docker-compose.ylm file):
 
 AUTENTIA WEB MAVEN MODULE (port 8081)
 
-[source,java]
-----
-$ ./autentia/autentia-web/target/bin autentia (unix/linux)
-/autentia/autentia-web/target/bin/autentia.bat (windows)
-----
-
 Access to you application with your favorite browser
-
 
 [source,java]
 ----
@@ -58,15 +53,6 @@ localhost:8081/course
 ----
 
 ### How to run rest api
-
-AUTENTIA REST API (port 8080)
-
-[source,java]
-----
-$ ./autentia/autentia-api-rest/target/bin/autentia (unix/linux)
-/autentia-api-rest/target/bin/autentia.bat (windows)
-----
-
 
 
 Use postman test cases defined in postman folder
