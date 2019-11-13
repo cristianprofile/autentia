@@ -32,6 +32,11 @@ If command ends successfully inside target/bin you will have a script to run you
 
 ### Run docker compose up
 
+[source,java]
+----
+docker-compose up
+----
+
 Run docker-compose up command in main folder (docker-compose.ylm file).
 3 services will be created :
 
